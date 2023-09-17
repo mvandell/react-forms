@@ -13,8 +13,8 @@ export default function Authenticate({token}) {
             })
             const result = await response.json();
             console.log(result);
-            setSuccessMessage(result.message);
-            
+            setSuccessMessage(`${result.data.username}, ${result.message}`);
+            console.log(result.data.username);
         } catch (error) {
             setError(error.message);
         }

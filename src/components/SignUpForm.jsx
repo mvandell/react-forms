@@ -5,6 +5,19 @@ export default function SignUpForm({setToken}) {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
     
+    function handlePasswordChange(event) {
+        if (event.target.value.length <= 8) {
+            setError("Password too short. It must be at least 8 characters.");
+        }
+        if (event.target.value.length >= 20) {
+            setError("Password too long. It cannot be longer than 20 characters.");
+        }
+        if (event.target.value.length <= 20 && event.target.value.length >= 8) {
+            setError("");
+        }
+        setPassword(event.target.value);
+    }
+
     async function handleSubmit(event) {
         event.preventDefault();
         try {
@@ -32,7 +45,7 @@ export default function SignUpForm({setToken}) {
             </label>
             <br />
             <label>
-                Password: <input value={password} onChange={(event) => {setPassword(event.target.value)}}/>
+                Password: <input value={password} onChange={handlePasswordChange}/>
             </label>
             <br />
             <button type="submit">Submit</button>
